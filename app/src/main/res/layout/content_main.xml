@@ -22,41 +22,39 @@
             android:id="@+id/staticWelcomMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textview"
-            android:textSize="24sp"
-            tools:text="Welcome to Rock-Paper-Scissors" />
+            android:text="@string/welcome_to_rock_paper_scissors"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/staticPrompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textview"
-            android:textSize="24sp"
-            tools:text="Please Choose Your Weapon" />
+            android:text="@string/please_choose_your_weapon"
+            android:textSize="24sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/rockButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button"
-            android:textSize="30sp"
-            tools:text="Rock" />
+            android:onClick="playerClick"
+            android:text="@string/rock"
+            android:textSize="18sp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/paperButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button"
-            android:textSize="30sp"
-            tools:text="Paper" />
+            android:onClick="playerClick"
+            android:text="@string/paper"
+            android:textSize="18sp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/scissorsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button"
-            android:textSize="30sp"
-            tools:text="Scissors" />
+            android:onClick="playerClick"
+            android:text="@string/scissors"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/scores"
@@ -65,13 +63,13 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/playerWeapon"
+            android:id="@+id/playerChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/computerWeapon"
+            android:id="@+id/computerChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp" />
