@@ -1,6 +1,7 @@
 package com.example.jsu.kbflab2;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,15 +14,21 @@ import android.view.MenuItem;
 import android.widget.*;
 import java.util.Random;
 
+import static com.example.jsu.kbflab2.MainActivity.winningMessage.LOSE;
+import static com.example.jsu.kbflab2.MainActivity.winningMessage.TIE;
 import static com.example.jsu.kbflab2.MainActivity.winningMessage.WIN;
 
 public class MainActivity extends AppCompatActivity {
 
-    Weapon playerWeapon, computerWeapon;
+    Weapon playerWeapon;
+    Weapon computerWeapon;
     winningMessage result;
     Button rockButton, paperButton, scissorsButton;
     Random random;
-    TextView showValue;
+    int playerScore;
+    int computerScore;
+    int tie;
+
 
 
     @Override
@@ -36,8 +43,13 @@ public class MainActivity extends AppCompatActivity {
         rockButton = findViewById(R.id.rockButton);
         paperButton = findViewById(R.id.paperButton);
         scissorsButton = findViewById(R.id.scissorsButton);
-        showValue = findViewById(R.id.scores);
 
+        playerScore = 0;
+        computerScore = 0;
+        tie = 0;
+
+        ((TextView) findViewById(R.id.scores)).setText(("Player: " + " " + playerScore + " " + "Computer: " + " "
+                + computerScore));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,23 +64,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void playerClick(View view) {
 
         switch (view.getId()) {
 
             case R.id.rockButton:
                 playerWeapon = Weapon.ROCK;
-                ((TextView) findViewById(R.id.playerChoice)).setText(playerWeapon.toString());
+                ((TextView) findViewById(R.id.plrWeapon)).setText(playerWeapon.toString());
+
                 break;
 
             case R.id.paperButton:
                 playerWeapon = Weapon.PAPER;
-                ((TextView) findViewById(R.id.playerChoice)).setText(playerWeapon.toString());
+                ((TextView) findViewById(R.id.plrWeapon)).setText(playerWeapon.toString());
                 break;
 
             case R.id.scissorsButton:
                 playerWeapon = Weapon.SCISSORS;
-                ((TextView) findViewById(R.id.playerChoice)).setText(playerWeapon.toString());
+                ((TextView) findViewById(R.id.plrWeapon)).setText(playerWeapon.toString());
                 break;
 
         }
@@ -78,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void compPick() {
-
 
         random = new Random();
         int ran = random.nextInt(3);
@@ -90,17 +104,17 @@ public class MainActivity extends AppCompatActivity {
 
             case 0:
                 computerWeapon = Weapon.ROCK;
-                ((TextView) findViewById(R.id.computerChoice)).setText(computerWeapon.toString());
+                ((TextView) findViewById(R.id.compWeapon)).setText(computerWeapon.toString());
                 break;
 
             case 1:
                 computerWeapon = Weapon.PAPER;
-                ((TextView) findViewById(R.id.computerChoice)).setText(computerWeapon.toString());
+                ((TextView) findViewById(R.id.compWeapon)).setText(computerWeapon.toString());
                 break;
 
             case 2:
                 computerWeapon = Weapon.SCISSORS;
-                ((TextView) findViewById(R.id.computerChoice)).setText(computerWeapon.toString());
+                ((TextView) findViewById(R.id.compWeapon)).setText(computerWeapon.toString());
                 break;
 
         }
@@ -110,24 +124,40 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (computerWeapon == Weapon.PAPER && playerWeapon == Weapon.ROCK) {
             result = winningMessage.LOSE;
-            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString());
+            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString() + " " + "Paper Covers Rock");
 
 
         } else if (computerWeapon == Weapon.ROCK && playerWeapon == Weapon.SCISSORS) {
             result = winningMessage.LOSE;
 
-            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString());
+            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString() + " " + "Rock Crushes Scissors");
 
         } else if (computerWeapon == Weapon.SCISSORS && playerWeapon == Weapon.PAPER) {
             result = winningMessage.LOSE;
-            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString());
+            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString() + " " + "Scissors Cuts Paper");
 
         } else {
             result = WIN;
-            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString());
+            ((TextView) findViewById(R.id.winningMessage)).setText(result.toString() + " " + playerWeapon + " " + "DESTROYS!" + " " + computerWeapon);
 
         }
-    }
+
+        if(result.message2.contains(LOSE.toString())) {
+            computerScore++;
+        }
+
+        else if(result.message2.contains(WIN.toString())){
+            playerScore++;
+        }
+            else{
+                tie++;
+
+            }
+
+            ((TextView) findViewById(R.id.scores)).setText(("Player: " + " " + playerScore + " " + "Computer: " + " "
+                    + computerScore));
+
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -168,12 +198,11 @@ public class MainActivity extends AppCompatActivity {
     public enum winningMessage {
         TIE("It's a Tie"),
         WIN("YOU WIN!"),
-        LOSE("YOU LOSE");
+        LOSE("YOU LOSE!");
 
         private String message2;
 
         winningMessage(String msg) {message2 = msg;}
-
 
         @Override
         public String toString() {return message2;}

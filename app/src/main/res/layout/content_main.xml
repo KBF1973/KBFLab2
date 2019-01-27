@@ -58,21 +58,56 @@
 
         <TextView
             android:id="@+id/scores"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
         <TextView
             android:id="@+id/playerChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:text="@string/players_s_weapon"
             android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/plrWeapon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text=""
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
         <TextView
             android:id="@+id/computerChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:text="@string/computer_s_weapon"
             android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/compWeapon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text=""
+                android:textSize="18sp" />
+
+    </LinearLayout>
 
         <TextView
             android:id="@+id/winningMessage"

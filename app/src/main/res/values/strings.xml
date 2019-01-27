@@ -9,5 +9,7 @@
     <string name="paper">Paper</string>
     <string name="scissors">Scissors</string>
     <string name="Tie">It\'s a Tie!</string>
+    <string name="players_s_weapon">Players\'s Weapon:</string>
+    <string name="computer_s_weapon">Computer\'s Weapon:</string>
 
 </resources>
